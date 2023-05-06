@@ -50,14 +50,16 @@ app.get("/", function(req, res){
 
 app.get("/:ListName", function(req, res){
     const customListName = _.capitalize(req.params.ListName);
-    CustomList.findOne({name: customListName}).then((data)=>{
-        if(data === null) {
-            const customListData = CustomList.insertMany({name: customListName, item: defaultItems})
-            res.redirect("/"+customListName)
-        }else{
-            res.render("list", {listTitle: data.name, newItem: data.item})
-        }
-    })
+    if (customListName != "favicon.ico"){
+        CustomList.findOne({name: customListName}).then((data)=>{
+            if(data === null) {
+                const customListData = CustomList.insertMany({name: customListName, item: defaultItems})
+                res.redirect("/"+customListName)
+            }else{
+                res.render("list", {listTitle: data.name, newItem: data.item})
+            }
+        })
+    }
 });
 
 
