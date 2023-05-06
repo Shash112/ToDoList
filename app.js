@@ -50,7 +50,7 @@ app.get("/", function(req, res){
 
 app.get("/:ListName", function(req, res){
     const customListName = _.capitalize(req.params.ListName);
-    if (customListName != "favicon.ico"){
+    if (customListName !=  _.capitalize("Favicon.ico")){
         CustomList.findOne({name: customListName}).then((data)=>{
             if(data === null) {
                 const customListData = CustomList.insertMany({name: customListName, item: defaultItems})
